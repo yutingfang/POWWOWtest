@@ -8,6 +8,7 @@ services:
     analysis:
         build:
             dockerfile: Dockerfile_ana
-    
+        depends_on:
+            - receiver
     # volumes:
     #     buffer:
