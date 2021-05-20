@@ -1,0 +1,13 @@
+version: "3.9"
+services:
+
+    receiver:
+        build:
+            dockerfile: Dockerfile_rec
+
+    analysis:
+        build:
+            dockerfile: Dockerfile_ana
+    
+    # volumes:
+    #     buffer:
