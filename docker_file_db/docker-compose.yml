@@ -1,14 +1,18 @@
 version: "3.9"
 services:
-
+    
     receiver:
         build:
             dockerfile: Dockerfile_rec
+        volumes: 
+            - .:/db_test
+          
 
     analysis:
         build:
-            dockerfile: Dockerfile_ana
+            dockerfile: Dockerfile_ana 
         depends_on:
             - receiver
-    # volumes:
-    #     buffer:
+        volumes: 
+            - .:/db_test
+
