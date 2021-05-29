@@ -15,8 +15,4 @@ services:
             - receiver
         volumes: 
             - .:/db_test
-          
-        
-    
-    # volumes:
-    #     buffer:
+
