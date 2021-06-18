@@ -1,0 +1,26 @@
+# This config file is an example of what can be emitted by the scheduler to run a job with multiple containers
+# configured as they are in this directory - labeled as v1
+
+# Replace '_n' with job ID
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: experiment_n
+spec:
+  containers:
+  - image: analysis
+    name: experiment_analysis
+    volumeMounts:
+    - name: volume_n
+      mountPath: /output
+  initContainers:
+  - image: transaction
+    name: experiment_transaction
+    volumeMounts:
+    - name: volume_n
+      mountpath: /output
+  volumes:
+  - name: volume_n
+    hostPath:
+      path: /edgestorage/_n
