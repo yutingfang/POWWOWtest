@@ -1,0 +1,35 @@
+Summer Plan Sync Meeting  2021.6.8
+Dr. Rajiv, Haiyang Qi, Yuting Fang, Salil Reddy
+
+Experiment - Containerlization
+  Two containers: transaction + anlysis
+  Way to persist DB: volume, docker’s tool connecting containers’ filesystem back to host
+  Behavior: able to run but order not stable; not the case transaction end, then analysis    
+  Status: run on local (personal computer), under moving to server
+  Potential Problem: database
+	  Need to be wrtien and read at same time by different container, annotation privilege
+	  Now using SQLite – file format, not for large-scale applications 
+    May need to separate database as a single container.
+
+Jayson Feedback on Experiment:
+  o	The lesson: When working with any type of containerized workload, you want your code, data, etc to be functionally immutable by the host. 
+    That means that you don't want your code existing/running in a volume that the host can access (and not just for the reasons I specified above). 
+  o	The fix: for both containers, copy the code into a different directory that is not a host volume, then add in a host volume and move your output files to there. 
+    Basically run your code wherever in the docker container you want as long as its not accessible to the host, and copy or write the outputs to your /output directory.
+
+Paper - POWWOW
+  Jayson is writing, should include analysis part. One integration work, pushed by eveybody and get results.
+
+Next Steps:
+1. Run simultaneously
+    One system is writing, at same time reading.
+    Slow down to see performance.
+2. Get a snapshot of data
+	  Analysis: apply on specific range of data
+    or run query, get portion of data and do analysis
+3. Other way of communication
+    socket:  get one container send message to next container; share file 
+    (e.g., transaction tell analysis specific range of data is ready)
+4. Anlysis
+    o	running multiple threads in a container (same analysis), see better performance
+    o	more complicated analysis
